@@ -14,16 +14,25 @@ const images = [
   },
 ];
 
-const galleryContainer = document.querySelector("#gallery");
 
-const galleryHTML = images
-  .map(
-    (image) => `
-    <li>
-      <img src="${image.url}" alt="${image.alt}">
-    </li>
-  `
-  )
-  .join("");
+const gallery = document.querySelector('.gallery');
 
-galleryContainer.insertAdjacentHTML("beforeend", galleryHTML);
+const galleryItems = images.map((image) => {
+  const img = document.createElement('img');
+  img.src = image.url;
+  img.alt = image.alt;
+  img.style.width = '100%';
+  img.style.height = 'auto';
+  img.style.borderRadius = '10px'; 
+
+  const li = document.createElement('li');
+  li.appendChild(img);
+
+  return li;
+});
+
+galleryItems.forEach((item) => {
+  gallery.appendChild(item);
+});
+
+gallery.classList.add('flex-gallery'); 
